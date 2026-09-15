@@ -1,0 +1,244 @@
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <h1>📚 StudyHub</h1>
+      <p>Study Smart • Stay Consistent</p>
+    </div>
+    <button id="darkBtn" class="iconBtn">🌙</button>
+  </header>
+
+  <nav class="nav">
+    <button class="navBtn active" onclick="showPage('home',this)">🏠<small>Home</small></button>
+    <button class="navBtn" onclick="showPage('study',this)">📖<small>Study</small></button>
+    <button class="navBtn" onclick="showPage('profile',this)">👤<small>Page 2</small></button>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home" class="page active">
+
+    <div class="welcome card">
+      <div>
+        <span>WELCOME BACK 👋</span>
+        <h2 id="welcomeName">Student</h2>
+        <p>Let's make today productive.</p>
+      </div>
+      <div class="bigEmoji">🎯</div>
+    </div>
+
+    <div class="card">
+      <div class="titleRow">
+        <h3>📊 Overall Progress</h3>
+        <b id="overallPercent">0%</b>
+      </div>
+
+      <div class="progress">
+        <div id="overallBar"></div>
+      </div>
+
+      <p id="overallText">Start completing chapters and tasks.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat card">
+        <b id="chapterDone">0</b>
+        <span>Chapters Done</span>
+      </div>
+
+      <div class="stat card">
+        <b id="taskDone">0</b>
+        <span>Tasks Done</span>
+      </div>
+
+      <div class="stat card">
+        <b id="homeStreak">0</b>
+        <span>🔥 Streak</span>
+      </div>
+
+      <div class="stat card">
+        <b id="homeStudyDays">0</b>
+        <span>Study Days</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🎯 Today's Tasks</h3>
+      <div id="homeTasks"></div>
+    </div>
+
+  </section>
+
+
+  <!-- STUDY -->
+  <section id="study" class="page">
+
+    <div class="heading">
+      <h2>📖 Study Center</h2>
+      <p>Track your PCMB preparation.</p>
+    </div>
+
+    <!-- SUBJECT TABS -->
+    <div class="subjectTabs">
+      <button class="subjectTab active" onclick="showSubject('Physics',this)">⚡ Physics</button>
+      <button class="subjectTab" onclick="showSubject('Chemistry',this)">🧪 Chemistry</button>
+      <button class="subjectTab" onclick="showSubject('Biology',this)">🧬 Biology</button>
+      <button class="subjectTab" onclick="showSubject('Mathematics',this)">📐 Maths</button>
+    </div>
+
+    <!-- CHAPTER TRACKER -->
+    <div class="card">
+
+      <div class="titleRow">
+        <div>
+          <h3 id="subjectTitle">⚡ Physics</h3>
+          <p id="subjectProgressText">0 / 14 completed</p>
+        </div>
+        <b id="subjectPercent">0%</b>
+      </div>
+
+      <div class="progress">
+        <div id="subjectBar"></div>
+      </div>
+
+      <div id="chapterList" class="chapters"></div>
+
+    </div>
+
+
+    <!-- TASKS -->
+    <div class="card">
+
+      <div class="titleRow">
+        <h3>📝 Study Tasks</h3>
+        <span id="taskCounter">0 tasks</span>
+      </div>
+
+      <input id="taskInput" type="text" placeholder="What do you want to study?">
+
+      <select id="taskSubject">
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Biology</option>
+        <option>Mathematics</option>
+      </select>
+
+      <button class="primary" onclick="addTask()">➕ Add Task</button>
+
+      <div id="taskList"></div>
+
+    </div>
+
+
+    <!-- POMODORO -->
+    <div class="card timerCard">
+
+      <span class="label">FOCUS SESSION</span>
+      <h3>🍅 Pomodoro Timer</h3>
+
+      <div id="timer">25:00</div>
+
+      <div>
+        <button onclick="startTimer()">▶ Start</button>
+        <button onclick="pauseTimer()">⏸ Pause</button>
+        <button onclick="resetTimer()">🔄 Reset</button>
+      </div>
+
+      <p>25 minutes focus session</p>
+
+    </div>
+
+  </section>
+
+
+  <!-- PAGE 2 -->
+  <section id="profile" class="page">
+
+    <div class="heading">
+      <h2>👤 My Dashboard</h2>
+      <p>Your profile, reminders and study streak.</p>
+    </div>
+
+
+    <!-- PROFILE -->
+    <div class="card">
+
+      <h3>👤 Profile</h3>
+
+      <input id="profileName" type="text" placeholder="Your name">
+
+      <select id="profileClass">
+        <option>Class 12 PCMB</option>
+        <option>Class 12 PCB</option>
+        <option>Class 12 PCM</option>
+        <option>Other</option>
+      </select>
+
+      <button class="primary" onclick="saveProfile()">💾 Save Profile</button>
+
+      <div id="profileDisplay" class="profileDisplay">
+        No profile saved.
+      </div>
+
+    </div>
+
+
+    <!-- REMINDERS -->
+    <div class="card">
+
+      <h3>🔔 Reminders</h3>
+
+      <input id="reminderText" type="text" placeholder="e.g. Physics revision">
+
+      <input id="reminderTime" type="time">
+
+      <button class="primary" onclick="addReminder()">🔔 Add Reminder</button>
+
+      <div id="reminderList"></div>
+
+    </div>
+
+
+    <!-- STREAK -->
+    <div class="card streakCard">
+
+      <div class="fire">🔥</div>
+
+      <h3>Study Streak</h3>
+
+      <div class="streakNumber">
+        <span id="streak">0</span>
+        <small>days</small>
+      </div>
+
+      <p>Current Streak</p>
+
+      <div class="streakStats">
+
+        <div>
+          <b id="bestStreak">0</b>
+          <span>Best Streak</span>
+        </div>
+
+        <div>
+          <b id="totalStudyDays">0</b>
+          <span>Total Study Days</span>
+        </div>
+
+      </div>
+
+      <button class="streakBtn" onclick="markStudyToday()">
+        ✅ Mark Today as Studied
+      </button>
+
+      <p id="streakMessage"></p>
+
+    </div>
+
+  </section>
+
+
+  <footer>
+    📚 StudyHub • Your Personal Study Companion
+  </footer>
+
+                                                </div>
